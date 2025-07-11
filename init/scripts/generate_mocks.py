@@ -68,4 +68,3 @@ def createMocks():
     df = getAutomobileList(db)
     print(df.head())
 
-createMocks()
