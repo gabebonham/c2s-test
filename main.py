@@ -9,19 +9,23 @@ class Runner:
             "pesquisar":self.displaySearch,
             "gerar":createMocks,
             "api":self.runApi,
+            "q":self.quit,
             "stop":self.stopApi
         }
+        self.flag = False
         pass
+    def quit(self)->bool:
+        return True
     def displayPresentation(self):
         print('=== RODANDO PROGRAMA DE PESQUISA ===')
         print("Opções:")
         print("'q': para terminar o progrma.")
         print("'pesquisar': para pesquisar automóveis.")
         print("'gerar': para gerar automóveis.")
-        if self.api is not None:
-            print("'stop': para parar a api.")
+        print("'api': para rodar a api.")
+        print("'stop': para parar a api.")
 
-    def displaySearch(self)->str:
+    def displaySearch(self)->bool:
         
         print('=== CONSULTA DE AUTOMÓVEIS ===')
         print('Para consultar um automóvel, digite sua busca com o valor após a variável.')
@@ -40,36 +44,44 @@ class Runner:
         print('=== ===================== ===')
         search = input('Pesquisar: ').lower()
         if search == 'q':
-            return 
+            return False
         else:
             results = self.service.getResults(search)
             print('Resultados:')
             print(results)
         self.displaySearch()
-    process = None
-    def runApi(self):
+    
+    def runApi(self)->bool:
         self.process = subprocess.Popen(["uvicorn", "app_controller:app", "--reload"],
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.STDOUT,
                                         universal_newlines=True)
         print('Api aberta em http://127.0.0.1:8000')
+        return False
         
-    def stopApi(self):
-        self.process.terminate()
-        self.process = None
-        print('Api fechada')
+    def stopApi(self)->bool:
+        if self.process:
+            self.process.terminate()
+            self.process = None
+            print('Api fechada')
+        return False
     
     def mainLoop(self):
         self.displayPresentation()
         search = input('Enter: ').lower()
-        if search not in self.options.keys():
-            return
-        else:
-            self.options[search]()
+        if search in self.options.keys():
+            try:
+                self.flag = self.options[search]()
+            except Exception as e:
+                print(f'Ocorreu um erro: {e}')
+        if self.flag:
+            return 
+        
         self.mainLoop()
             
     def main(self):
         self.mainLoop()
         print('Finalizando programa.')
+        
 runner = Runner()
 runner.main()
