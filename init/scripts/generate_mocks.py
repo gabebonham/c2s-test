@@ -5,10 +5,10 @@ from db.db import Db
 import pandas as pd
 ids = ["A001", "A002", "B789", "Z123", "CAR56", "X9Y8"]
 names = ["Mustang", "Civic", "Model S", "Corolla", "F-150", "Chiron", "Outback"]
-colors = ["Red", "Blue", "Black", "White", "Green", "Yellow", "Silver", "Gray"]
+colors = ["Vermelho", "Azul", "Preto", "Branco", "Verde", "Amarelo", "Prata", "Cinza"]
 doorNumbers = [2, 3, 4, 5]
 prices = [15000.0, 23000.99, 34999.95, 45000.75, 120000.0, 7999.5]
-driverNames = ["Alice", "Bob", "Carlos", "Dana", "Eve", "Frank", "Grace"]
+driverNames = ["Alice", "Eduardo", "Ednaldo", "Adolfo", "Roberto", "Francisco", "Gabriel"]
 sizes = [4.2, 3.8, 5.0, 4.7, 4.0] 
 weights = [1200.0, 1350.5, 1500.0, 1800.25, 2000.75, 1100.0] 
 wheelNumbers = [3, 4, 6, 8] 
@@ -63,8 +63,10 @@ def getAutomobileList(db:Db)->pd.DataFrame:
 
 def createMocks():
     db = Db()
+    db.clear()
     automobileList = createAutomobileList()
     insertAutomobileList(automobileList, db)
     df = getAutomobileList(db)
+    print(df.shape[0])
     print(df.head())
 

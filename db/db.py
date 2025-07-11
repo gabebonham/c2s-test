@@ -21,8 +21,26 @@ class Db:
             )
         """
         self.select_query = "SELECT * FROM automobile;"
+        self.delete_all_query = "DELETE FROM automobile;"
         pass
     
+    def wipeAutomobiles(self):
+        connection = self.connect()
+        cursor = connection.cursor()
+
+        cursor.execute(self.delete_all_query)
+        connection.commit()
+        cursor.close()
+        connection.close()
+            
+    def clear(self):
+        df = self.getAllAutomobileDF()
+        if len(df):
+            self.wipeAutomobiles()
+        else:
+            return
+            
+            
     def getAllAutomobileDF(self) -> pd.DataFrame:
         connection = self.connect()
         cursor = connection.cursor()

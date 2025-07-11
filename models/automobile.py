@@ -26,3 +26,18 @@ class Automobile:
         self.brand = brand
         self.createdAt = createdAt
         pass
+    def to_dict_pt(self)->dict:
+        return {
+            'id': self.id,
+            'nome': self.name,
+            'cor': self.color,
+            'portas': self.doorNumber,
+            'preço': str(self.price),
+            'motorista': self.driverName,
+            'tamanho': str(self.size),
+            'peso': str(self.weight),
+            'rodas': self.wheelNumber,
+            'ano': self.year,
+            'marca': self.brand,
+            'criado': self.createdAt.isoformat() if hasattr(self.createdAt, 'isoformat') else str(self.createdAt)
+        }

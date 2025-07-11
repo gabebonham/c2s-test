@@ -18,14 +18,14 @@ def getAlias()->dict:
         'id':'id',
         "name": "nome",
         "color": "cor",
-        "doorNumber": "numero de portas",
+        "door_number": "portas",
         "price": "preço",
-        "driverName": "nome do motorista",
+        "driver_name": "motorista",
         "weight": "peso",
         "size": "tamanho",
-        "wheelNumber": "numero de rodas",
+        "wheel_number": "rodas",
         "year": "ano",
         "brand": "marca",
-        "createdAt": "criado"
+        "created_at": "criado"
     }
     return aliases
