@@ -29,7 +29,7 @@ class Runner:
         
         print('=== CONSULTA DE AUTOMÓVEIS ===')
         print('Para consultar um automóvel, digite sua busca com o valor após a variável.')
-        print('Ex: Me mostre automóveis com nome Buggati do ano 2000')
+        print('Ex: Me mostre automóveis com marca Bugatti do ano 2020')
         print('Variáveis inclusas nos mocks:')
         print(f'Nomes: {','.join(names)}')
         print(f'Cores: {','.join(colors)}')
